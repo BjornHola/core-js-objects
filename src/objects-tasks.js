@@ -17,9 +17,12 @@
  *    shallowCopy({a: 2, b: { a: [1, 2, 3]}}) => {a: 2, b: { a: [1, 2, 3]}}
  *    shallowCopy({}) => {}
  */
-function shallowCopy(/* obj */) {
-  throw new Error('Not implemented');
+function shallowCopy(obj) {
+  return Object.fromEntries(Object.entries(obj));
 }
+console.log(shallowCopy({ a: 2, b: 5 }));
+console.log(shallowCopy({ a: 2, b: { a: [1, 2, 3] } }));
+console.log(shallowCopy({}));
 
 /**
  * Merges array of objects into a single object. If there are overlapping keys, the values
