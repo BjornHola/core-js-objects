@@ -20,9 +20,9 @@
 function shallowCopy(obj) {
   return Object.fromEntries(Object.entries(obj));
 }
-console.log(shallowCopy({ a: 2, b: 5 }));
-console.log(shallowCopy({ a: 2, b: { a: [1, 2, 3] } }));
-console.log(shallowCopy({}));
+shallowCopy({ a: 2, b: 5 });
+shallowCopy({ a: 2, b: { a: [1, 2, 3] } });
+shallowCopy({});
 
 /**
  * Merges array of objects into a single object. If there are overlapping keys, the values
