@@ -61,10 +61,18 @@ mergeObjects([]);
  *    removeProperties({name: 'John', age: 30, city: 'New York'}, ['age']) => {name: 'John', city: 'New York'}
  *
  */
-function removeProperties(/* obj, keys */) {
-  throw new Error('Not implemented');
+function removeProperties(obj, keys) {
+  const randomArr = Object.entries(obj);
+  const filteredArr = randomArr.filter(([key]) => !keys.includes(key));
+  const result = filteredArr.reduce((accumulator, [key, value]) => {
+    accumulator[key] = value;
+    return accumulator;
+  }, {});
+  return result;
 }
-
+removeProperties({ a: 1, b: 2, c: 3 }, ['b', 'c']);
+removeProperties({ a: 1, b: 2, c: 3 }, ['d', 'e']);
+removeProperties({ name: 'John', age: 30, city: 'New York' }, ['age']);
 /**
  * Compares two source objects. Returns true if the objects are equal and false otherwise.
  * There are no nested objects.
