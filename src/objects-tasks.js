@@ -43,13 +43,11 @@ function mergeObjects(objects) {
     return acc;
   }, {});
 }
-console.log(
-  mergeObjects([
-    { a: 1, b: 2 },
-    { b: 3, c: 5 },
-  ])
-);
-console.log(mergeObjects([]));
+mergeObjects([
+  { a: 1, b: 2 },
+  { b: 3, c: 5 },
+]);
+mergeObjects([]);
 /**
  * Removes a properties from an object.
  *
