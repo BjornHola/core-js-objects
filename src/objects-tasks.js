@@ -85,10 +85,24 @@ removeProperties({ name: 'John', age: 30, city: 'New York' }, ['age']);
  *    compareObjects({a: 1, b: 2}, {a: 1, b: 2}) => true
  *    compareObjects({a: 1, b: 2}, {a: 1, b: 3}) => false
  */
-function compareObjects(/* obj1, obj2 */) {
-  throw new Error('Not implemented');
+function compareObjects(obj1, obj2) {
+  if (obj1 === obj2) return true;
+  if (
+    obj1 === null ||
+    typeof obj1 !== 'object' ||
+    obj2 === null ||
+    typeof obj2 !== 'object'
+  )
+    return false;
+  const keyOfObj1 = Object.keys(obj1);
+  const keyOfObj2 = Object.keys(obj2);
+  if (keyOfObj1.length !== keyOfObj2.length) return false;
+  return keyOfObj1.every(
+    (key) => keyOfObj2.includes(key) && compareObjects(obj1[key], obj2[key])
+  );
 }
-
+compareObjects({ a: 1, b: 2 }, { a: 1, b: 2 });
+compareObjects({ a: 1, b: 2 }, { a: 1, b: 3 });
 /**
  * Checks if the source object is empty.
  * Returns true if the object contains no enumerable own properties, false otherwise.
