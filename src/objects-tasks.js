@@ -136,10 +136,16 @@ isEmptyObject({ a: 1 });
  *    immutableObj.newProp = 'new';
  *    console.log(immutableObj) => {a: 1, b: 2}
  */
-function makeImmutable(/* obj */) {
-  throw new Error('Not implemented');
+function makeImmutable(obj) {
+  return Object.freeze(obj);
 }
-
+const immutableObj = makeImmutable({ a: 1, b: 2 });
+immutableObj.a = 5;
+makeImmutable();
+delete immutableObj.a;
+makeImmutable();
+immutableObj.newProp = 'new';
+makeImmutable();
 /**
  * Returns a word from letters whose positions are provided as an object.
  *
