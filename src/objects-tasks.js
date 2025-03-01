@@ -114,10 +114,12 @@ compareObjects({ a: 1, b: 2 }, { a: 1, b: 3 });
  *    isEmptyObject({}) => true
  *    isEmptyObject({a: 1}) => false
  */
-function isEmptyObject(/* obj */) {
-  throw new Error('Not implemented');
+function isEmptyObject(obj) {
+  const result = Object.keys(obj);
+  return result.length === 0;
 }
-
+isEmptyObject({});
+isEmptyObject({ a: 1 });
 /**
  * Makes the source object immutable by preventing any changes to its properties.
  *
