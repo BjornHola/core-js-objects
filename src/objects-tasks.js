@@ -247,9 +247,20 @@ function Rectangle(width, height) {
   };
 }
 const r = new Rectangle(10, 20);
-r.width;
-r.height;
-r.getArea();
+const { width, height } = r;
+
+// Используем метод getArea() для получения площади
+const area = r.getArea();
+
+// Функция, использующая свойства объекта
+function useRectangleProperties(w, h, a) {
+  // Здесь вы можете использовать переменные width, height и area
+  return `Ширина: ${w}, Высота: ${h}, Площадь: ${a}`;
+}
+
+// Пример использования переменных
+useRectangleProperties(width, height, area);
+
 /**
  * Returns the JSON representation of specified object
  *
