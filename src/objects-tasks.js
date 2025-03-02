@@ -247,9 +247,9 @@ function Rectangle(width, height) {
   };
 }
 const r = new Rectangle(10, 20);
-console.log(r.width);
-console.log(r.height);
-console.log(r.getArea());
+r.width;
+r.height;
+r.getArea();
 /**
  * Returns the JSON representation of specified object
  *
