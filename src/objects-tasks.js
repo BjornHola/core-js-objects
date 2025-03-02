@@ -183,31 +183,44 @@ makeWord({ H: [0], e: [1], l: [2, 3, 8], o: [4, 6], W: [5], r: [7], d: [9] });
  *    sellTickets([25, 100]) => false (The seller does not have enough money to give change.)
  */
 function sellTickets(queue) {
-  function checkChange(subQueue, initial) {
+  let change25 = 0;
+  let change50 = 0;
+
+  function checkChange(subQueue) {
     if (subQueue.length === 0) return true;
 
     const [cost, ...restQueue] = subQueue;
 
     if (cost === 25) {
-      return checkChange(restQueue, initial + 25);
+      change25 += 1;
+      return checkChange(restQueue);
     }
     if (cost === 50) {
-      if (initial >= 25) {
-        return checkChange(restQueue, initial - 25);
+      if (change25 > 0) {
+        change25 -= 1;
+        change50 += 1;
+        return checkChange(restQueue);
       }
       return false;
     }
     if (cost === 100) {
-      if (initial >= 75) {
-        return checkChange(restQueue, initial - 75);
+      if (change50 > 0 && change25 > 0) {
+        change50 -= 1;
+        change25 -= 1;
+        return checkChange(restQueue);
+      }
+      if (change25 >= 3) {
+        change25 -= 3;
+        return checkChange(restQueue);
       }
       return false;
     }
     return false;
   }
 
-  return checkChange(queue, 0);
+  return checkChange(queue);
 }
+
 sellTickets([25, 25, 50]);
 sellTickets([25, 100]);
 
