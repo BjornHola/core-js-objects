@@ -182,9 +182,34 @@ makeWord({ H: [0], e: [1], l: [2, 3, 8], o: [4, 6], W: [5], r: [7], d: [9] });
  *    sellTickets([25, 25, 50]) => true
  *    sellTickets([25, 100]) => false (The seller does not have enough money to give change.)
  */
-function sellTickets(/* queue */) {
-  throw new Error('Not implemented');
+function sellTickets(queue) {
+  function checkChange(subQueue, initial) {
+    if (subQueue.length === 0) return true;
+
+    const [cost, ...restQueue] = subQueue;
+
+    if (cost === 25) {
+      return checkChange(restQueue, initial + 25);
+    }
+    if (cost === 50) {
+      if (initial >= 25) {
+        return checkChange(restQueue, initial - 25);
+      }
+      return false;
+    }
+    if (cost === 100) {
+      if (initial >= 75) {
+        return checkChange(restQueue, initial - 75);
+      }
+      return false;
+    }
+    return false;
+  }
+
+  return checkChange(queue, 0);
 }
+sellTickets([25, 25, 50]);
+sellTickets([25, 100]);
 
 /**
  * Returns the rectangle object with width and height parameters and getArea() method
