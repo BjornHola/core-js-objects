@@ -318,10 +318,25 @@ fromJSON(Circle.prototype, '{"radius":10}');
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => {
+    const countryComparison = a.country.localeCompare(b.country);
+    if (countryComparison !== 0) {
+      return countryComparison;
+    }
+    return a.city.localeCompare(b.city);
+  });
 }
+const arrayCity = [
+  { country: 'Russia', city: 'Moscow' },
+  { country: 'Belarus', city: 'Minsk' },
+  { country: 'Poland', city: 'Warsaw' },
+  { country: 'Russia', city: 'Saint Petersburg' },
+  { country: 'Poland', city: 'Krakow' },
+  { country: 'Belarus', city: 'Brest' },
+];
 
+sortCitiesArray(arrayCity);
 /**
  * Groups elements of the specified array by key.
  * Returns multimap of keys extracted from array elements via keySelector callback
