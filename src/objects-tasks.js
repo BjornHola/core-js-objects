@@ -249,18 +249,12 @@ function Rectangle(width, height) {
 const r = new Rectangle(10, 20);
 const { width, height } = r;
 
-// Используем метод getArea() для получения площади
 const area = r.getArea();
 
-// Функция, использующая свойства объекта
 function useRectangleProperties(w, h, a) {
-  // Здесь вы можете использовать переменные width, height и area
   return `Ширина: ${w}, Высота: ${h}, Площадь: ${a}`;
 }
-
-// Пример использования переменных
 useRectangleProperties(width, height, area);
-
 /**
  * Returns the JSON representation of specified object
  *
@@ -271,10 +265,12 @@ useRectangleProperties(width, height, area);
  *    [1,2,3]   =>  '[1,2,3]'
  *    { height: 10, width: 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  const result = JSON.stringify(obj);
+  return result;
 }
-
+getJSON([1, 2, 3]);
+getJSON({ height: 10, width: 20 });
 /**
  * Returns the object of specified type from JSON representation
  *
@@ -286,10 +282,16 @@ function getJSON(/* obj */) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
+function fromJSON(proto, json) {
+  const obj = JSON.parse(json);
+  const newObj = Object.create(proto);
+  return Object.assign(newObj, obj);
 }
-
+function Circle() {}
+Circle.prototype.getArea = function f() {
+  return Math.PI * this.radius * this.radius;
+};
+fromJSON(Circle.prototype, '{"radius":10}');
 /**
  * Sorts the specified array by country name first and city name
  * (if countries are equal) in ascending order.
